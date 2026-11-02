@@ -1,0 +1,15 @@
+[project]
+name = "interview-questions-mcp"
+version = "0.1.0"
+description = "AI Engineer interview questions MCP server — practice with your AI assistant"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+dependencies = ["mcp[cli]>=1.0.0"]
+
+[project.scripts]
+interview-questions-mcp = "server:mcp.run"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

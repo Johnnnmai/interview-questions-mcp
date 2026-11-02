@@ -1,0 +1,294 @@
+{
+  "topics": {
+    "rag": {
+      "name": "Retrieval-Augmented Generation (RAG)",
+      "questions": [
+        {
+          "id": "rag-basics",
+          "question": "What is RAG (retrieval-augmented generation)?",
+          "level": "junior",
+          "scoring_points": [
+            "Describes indexing path: parse, chunk, embed, store vectors with metadata",
+            "Describes query path: embed query, retrieve top-k, re-rank, generate grounded answer",
+            "Notes that RAG failures usually start at retrieval, not generation"
+          ]
+        },
+        {
+          "id": "rag-failure",
+          "question": "Where does RAG usually fail first?",
+          "level": "mid",
+          "scoring_points": [
+            "Identifies retrieval as the primary failure point, not the generator",
+            "Mentions wrong chunk or missing chunk as common retrieval failures",
+            "Suggests evaluating retrieval and generation separately"
+          ]
+        },
+        {
+          "id": "rag-idk",
+          "question": "How should a RAG system decide to say 'I don't know'?",
+          "level": "senior",
+          "scoring_points": [
+            "Combines signals: low retrieval scores below a calibrated threshold",
+            "Uses a verifier step that checks the draft answer against sources",
+            "Evaluates refusal precision as well as answer accuracy"
+          ]
+        }
+      ]
+    },
+    "transformers": {
+      "name": "Transformer Architecture",
+      "questions": [
+        {
+          "id": "transformer-basics",
+          "question": "Explain the transformer architecture",
+          "level": "junior",
+          "scoring_points": [
+            "Describes multi-head self-attention letting every token mix information from others",
+            "Mentions residual connections, layer normalization, and feed-forward network per block",
+            "Notes O(n²) cost in sequence length and that modern LLMs are decoder-only"
+          ]
+        },
+        {
+          "id": "decoder-only",
+          "question": "Why do most LLMs use decoder-only instead of encoder-decoder?",
+          "level": "mid",
+          "scoring_points": [
+            "One stack, one objective, scales simply",
+            "Handles generation natively without cross-attention complexity",
+            "Training and serving infrastructure is simpler to optimize"
+          ]
+        },
+        {
+          "id": "sqrt-dk",
+          "question": "Why divide by sqrt(d_k) in attention?",
+          "level": "senior",
+          "scoring_points": [
+            "Without it, dot products grow with dimension",
+            "Softmax saturates with large inputs, producing near-one-hot distributions",
+            "Gradients vanish through the saturated softmax"
+          ]
+        }
+      ]
+    },
+    "agents": {
+      "name": "AI Agents",
+      "questions": [
+        {
+          "id": "agent-basics",
+          "question": "What is an AI agent, and how is it different from a chain?",
+          "level": "junior",
+          "scoring_points": [
+            "Chain is a fixed sequence; agent is a loop where model chooses next action",
+            "Mentions ReAct pattern: reasoning step, tool call, observation",
+            "Notes agents handle open-ended tasks but are less predictable"
+          ]
+        },
+        {
+          "id": "react-pattern",
+          "question": "Explain the ReAct pattern.",
+          "level": "mid",
+          "scoring_points": [
+            "Reason + Act: model alternates reasoning, tool call, and observation",
+            "Continues until it can answer the original question",
+            "Production needs step limits, structured tool calls, and error handling"
+          ]
+        },
+        {
+          "id": "single-vs-multi-agent",
+          "question": "Single agent vs multi-agent systems: when is multi-agent worth it?",
+          "level": "senior",
+          "scoring_points": [
+            "Start with single agent unless parallel work or permission separation needed",
+            "Multi-agent adds cost: token use grows, hand-offs lose context, failures harder to locate",
+            "Prototype both and switch only when quality or speed clearly improves"
+          ]
+        }
+      ]
+    },
+    "fine-tuning": {
+      "name": "Fine-Tuning & Training",
+      "questions": [
+        {
+          "id": "rag-vs-ft",
+          "question": "RAG vs fine-tuning: when should you use each?",
+          "level": "junior",
+          "scoring_points": [
+            "RAG for private or changing knowledge; fine-tuning for consistent format or behavior",
+            "They are not exclusive: fine-tuned model plus RAG is common",
+            "Knowledge goes in retrieval; behavior goes in the weights"
+          ]
+        },
+        {
+          "id": "distillation",
+          "question": "What is model distillation and when would you use it?",
+          "level": "mid",
+          "scoring_points": [
+            "Transfers behavior from a large teacher to a smaller student via fine-tuning on teacher outputs",
+            "Use when a strong model handles a well-defined task but serving cost is too high",
+            "Validate on held-out set against ground truth, not just teacher agreement"
+          ]
+        },
+        {
+          "id": "icl-vs-ft",
+          "question": "Fine-tuning vs in-context learning: what is the difference?",
+          "level": "junior",
+          "scoring_points": [
+            "In-context learning puts examples in the prompt and changes no weights",
+            "Fine-tuning changes weights with training examples and needs data, eval, redeployment",
+            "Start with prompting; fine-tune only when prompting cannot hold the behavior"
+          ]
+        }
+      ]
+    },
+    "inference": {
+      "name": "LLM Inference & Optimization",
+      "questions": [
+        {
+          "id": "reduce-latency",
+          "question": "How do you reduce LLM latency?",
+          "level": "mid",
+          "scoring_points": [
+            "Split latency into TTFT (prefill) and generation (decode), trace to find dominant part",
+            "Streaming, shorter outputs, prefix caching, small routing models, parallel tool calls",
+            "Track p50 and p95 separately because tail latency is what users complain about"
+          ]
+        },
+        {
+          "id": "quantization",
+          "question": "What is LLM quantization and why does it matter?",
+          "level": "mid",
+          "scoring_points": [
+            "Fewer bits per weight means smaller model, fits on smaller GPU",
+            "Decoding is memory-bandwidth-bound, so fewer bytes means more tokens per second",
+            "Re-run task evals after quantizing because degradation is uneven across tasks"
+          ]
+        },
+        {
+          "id": "kv-cache",
+          "question": "What is the KV cache and why does it matter for inference?",
+          "level": "senior",
+          "scoring_points": [
+            "Keys and values of earlier tokens are stored and reused; each new token computes only its own",
+            "Memory grows with sequence length and often limits batch size more than weights",
+            "Mitigations: grouped-query attention, KV quantization, paged allocation (PagedAttention)"
+          ]
+        },
+        {
+          "id": "temperature-top-p",
+          "question": "What do temperature and top-p do in an LLM?",
+          "level": "junior",
+          "scoring_points": [
+            "Temperature rescales logits: near zero is focused, higher is more varied",
+            "Top-p trims the distribution to smallest set of tokens covering p probability",
+            "Set by task: low for extraction/code, higher for creative; adjust one, not both"
+          ]
+        }
+      ]
+    },
+    "embeddings": {
+      "name": "Embeddings & Vector Search",
+      "questions": [
+        {
+          "id": "embedding-vs-generative",
+          "question": "What is the difference between an embedding model and a generative model?",
+          "level": "junior",
+          "scoring_points": [
+            "Embedding model outputs a fixed-length vector for comparison; generative model produces tokens",
+            "Embeddings are cheap enough for millions of documents; generative models cost more per call",
+            "In RAG: embed chunks once, embed query at request time, then pay for generation"
+          ]
+        },
+        {
+          "id": "hybrid-search",
+          "question": "What is hybrid search and when should you use it?",
+          "level": "mid",
+          "scoring_points": [
+            "Runs lexical (BM25) and dense (embedding) retrieval over same corpus",
+            "Uses rank fusion (e.g., reciprocal rank fusion) to combine results",
+            "Use when queries contain identifiers, error codes, or jargon that embeddings blur"
+          ]
+        },
+        {
+          "id": "hnsw-vs-ivf",
+          "question": "HNSW vs IVF: how do vector indexes trade off recall, speed and memory?",
+          "level": "senior",
+          "scoring_points": [
+            "HNSW: multi-layer graph, excellent recall and latency, but high memory from graph links",
+            "IVF: cluster-based, lower memory especially with PQ, but recall drops if nprobe is low",
+            "Measure recall@10 against exact search on sample queries before choosing parameters"
+          ]
+        },
+        {
+          "id": "chunking-strategy",
+          "question": "How do you choose a chunking strategy for RAG?",
+          "level": "mid",
+          "scoring_points": [
+            "Follow document structure (headings, paragraphs, code blocks) rather than fixed character counts",
+            "Small chunks give sharper embeddings; large chunks give more context; small-to-parent is a compromise",
+            "Compare strategies on real questions with known answer passages, not by intuition"
+          ]
+        }
+      ]
+    },
+    "safety": {
+      "name": "LLM Safety & Reliability",
+      "questions": [
+        {
+          "id": "prompt-injection",
+          "question": "What is prompt injection and how do you defend against it?",
+          "level": "mid",
+          "scoring_points": [
+            "Untrusted text overrides developer intent; indirect injection through retrieved content is harder",
+            "No prompt fully prevents it because instructions and data share one channel",
+            "Defend in layers: least-privilege tools, human confirmation, input/output filtering, audit logs"
+          ]
+        },
+        {
+          "id": "hallucination",
+          "question": "Why do LLMs hallucinate, and how do you reduce it?",
+          "level": "mid",
+          "scoring_points": [
+            "Model is trained to produce plausible continuations, not verify facts",
+            "Ground answers in retrieved sources, allow 'I don't know', constrain with schemas",
+            "Measure by breaking answers into claims and checking each against sources"
+          ]
+        },
+        {
+          "id": "function-calling",
+          "question": "What is function calling (tool calling) in LLMs?",
+          "level": "junior",
+          "scoring_points": [
+            "Model returns structured call (name + arguments) instead of text; your code executes it",
+            "Quality depends on tool design: small set, non-overlapping, clear descriptions, enums",
+            "Validate arguments, check permissions, require confirmation for side-effecting actions"
+          ]
+        }
+      ]
+    },
+    "prompting": {
+      "name": "Prompting Techniques",
+      "questions": [
+        {
+          "id": "chain-of-thought",
+          "question": "What is chain-of-thought prompting and when does it help?",
+          "level": "junior",
+          "scoring_points": [
+            "Getting the model to write intermediate reasoning before the answer",
+            "Helps most on multi-step tasks; adds little to simple classification or fact lookup",
+            "Costs output tokens and latency; treat reasoning as debugging aid, not proof"
+          ]
+        },
+        {
+          "id": "tokenization",
+          "question": "What is tokenization in LLMs and why does it matter?",
+          "level": "junior",
+          "scoring_points": [
+            "Turns text into integer IDs using subword tokenizers like BPE",
+            "Everything is metered in tokens: price, latency, context window",
+            "Token efficiency differs by language; explains failures like letter counting"
+          ]
+        }
+      ]
+    }
+  }
+}
