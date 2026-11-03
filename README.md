@@ -2,7 +2,7 @@
 
 > Maintained version: [ai-interview-questions-mcp](https://github.com/Johnnnmai/ai-interview-questions-mcp) (install this one).
 
-**Free:** [Check your interview answer](https://johnnnmai.github.io/ai-engineer-interview-questions/answer-check/?utm_source=github&utm_medium=readme&utm_campaign=interview-questions-mcp)  |  **Weekly drills:** [Interview Pass, $19/mo](https://buy.stripe.com/14AeVc4Wv7ita7O1Si5kk0j?utm_source=github&utm_medium=readme&utm_campaign=interview-questions-mcp)
+**Free:** [Check your interview answer](https://johnnnmai.github.io/ai-engineer-interview-questions/answer-check/?utm_source=github&utm_medium=readme&utm_campaign=interview-questions-mcp)  |  **Weekly drills:** [Interview Pass, $19/mo](https://valenx.org/pass?utm_source=github&utm_medium=readme&utm_campaign=interview-questions-mcp)
 
 An MCP server that gives your AI assistant access to curated AI Engineer interview questions with scoring rubrics. Practice directly in Claude Desktop, Cursor, or any MCP-compatible client.
 
