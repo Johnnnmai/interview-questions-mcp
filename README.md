@@ -2,7 +2,7 @@
 
 > Maintained version: [ai-interview-questions-mcp](https://github.com/Johnnnmai/ai-interview-questions-mcp) (install this one).
 
-**Free:** [Check your interview answer](https://johnnnmai.github.io/ai-engineer-interview-questions/answer-check/?utm_source=github&utm_medium=readme&utm_campaign=interview-questions-mcp)  |  **Weekly drills:** [Interview Pass, $19/mo](https://valenx.org/pass?utm_source=github&utm_medium=readme&utm_campaign=interview-questions-mcp)
+**Free:** [Check your interview answer](https://johnnnmai.github.io/ai-engineer-interview-questions/answer-check/?utm_source=github&utm_medium=readme&utm_campaign=interview-questions-mcp)  |  **Weekly drills:** [Interview Pass, $19/mo](https://valenx.org/pass?utm_source=github&utm_medium=readme&utm_campaign=interview-questions-mcp&utm_content=interview-questions-mcp_L5)
 
 An MCP server that gives your AI assistant access to curated AI Engineer interview questions with scoring rubrics. Practice directly in Claude Desktop, Cursor, or any MCP-compatible client.
 
@@ -84,7 +84,7 @@ Every response includes a link to the free self-grading tool.
 
 ## Full kit
 
-**[AI Engineer Interview Playbook](https://sirjohnnymai.gumroad.com/l/xzptir?utm_source=github&utm_medium=mcp_readme&utm_campaign=line27_20261101)** — 200+ questions with model answers, system design templates, and scoring rubrics.
+**[AI Engineer Interview Playbook](https://sirjohnnymai.gumroad.com/l/xzptir?utm_source=github&utm_medium=mcp_readme&utm_campaign=line27_20261101&utm_content=interview-questions-mcp_L87)** — 200+ questions with model answers, system design templates, and scoring rubrics.
 
 ## License
 
